@@ -22,4 +22,8 @@ let phillipHelm: [String : Any] = ["name": "Phillip Helm", "height": 44, "experi
 let lesClay: [String : Any] = ["name": "Les Clay", "height": 42, "experienced": true, "guardians": "Wynonna Brown"]
 let herschelKrustofski: [String : Any] = ["name": "Herschel Krustofski", "height": 45, "experienced": true, "guardians": "Hyman and Rachel Krustofski "]
 
-print(joeSmith["experienced"]!)
+// collection to hold all players in the league
+
+let soccorLeaguePlayer = [joeSmith, jillTanner, billBon, evaGordon, mattGill, kimmyStein, sammyAdams, karlSaygan, suzaneGreenburg, salDali, joeKavalier, benFinkelstein, diegoSoto, chloeAlaska, arnoldWillis, phillipHelm, lesClay, herschelKrustofski]
+
+// print(soccorLeaguePlayer[10]["name"]!)
