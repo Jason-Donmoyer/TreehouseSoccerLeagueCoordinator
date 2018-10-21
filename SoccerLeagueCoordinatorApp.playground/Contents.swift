@@ -24,28 +24,20 @@ let herschelKrustofski: [String : Any] = ["name": "Herschel Krustofski", "height
 
 // collection to hold all players in the league
 
-var soccorLeaguePlayer = [joeSmith, jillTanner, billBon, evaGordon, mattGill, kimmyStein, sammyAdams, karlSaygan, suzaneGreenburg, salDali, joeKavalier, benFinkelstein, diegoSoto, chloeAlaska, arnoldWillis, phillipHelm, lesClay, herschelKrustofski]
-
-
+var players = [joeSmith, jillTanner, billBon, evaGordon, mattGill, kimmyStein, sammyAdams, karlSaygan, suzaneGreenburg, salDali, joeKavalier, benFinkelstein, diegoSoto, chloeAlaska, arnoldWillis, phillipHelm, lesClay, herschelKrustofski]
 
 // initialize arrays for experienced and non-experienced players
 
 var hasExperience = [Any]()
 var noExperience = [Any]()
 
-var teamSharks = [String : Any]()
-var teamDragons = [String : Any]()
-var teamRaptors = [String : Any]()
+var teamSharks = [Any]()
+var teamDragons = [Any]()
+var teamRaptors = [Any]()
 
+// sort players into experienced and non-experienced collections
 
-// sort players by height
-
-
-var sortedByHeight = soccorLeaguePlayer.sorted() {
-    $0["height"] as! Double > $1["height"] as! Double
-}
-
-for player in sortedByHeight {
+for player in players {
     if player["experienced"] as! Bool == true {
         hasExperience.append(player)
     } else {
@@ -53,9 +45,78 @@ for player in sortedByHeight {
     }
 }
 
+// logic to sort players into teams
+
+for player in hasExperience {
+    if hasExperience.count > teamSharks.count && teamSharks.count > teamDragons.count && teamSharks.count > teamRaptors.count {
+        teamRaptors.append(player)
+    } else if hasExperience.count > teamDragons.count && teamDragons.count < teamRaptors.count && teamDragons.count < teamSharks.count {
+        teamDragons.append(player)
+    } else {
+        teamSharks.append(player)
+    }
+}
+
+for player in noExperience {
+    if noExperience.count > teamSharks.count && teamSharks.count > teamDragons.count && teamSharks.count > teamRaptors.count {
+        teamRaptors.append(player)
+    } else if noExperience.count > teamDragons.count && teamDragons.count < teamRaptors.count && teamDragons.count < teamSharks.count {
+        teamDragons.append(player)
+    } else {
+        teamSharks.append(player)
+    }
+}
+
+// collection of letters
+
+var letters = [String]()
+
+//Logic to create letters to guardians and save them to a collection
+
+for player in teamSharks {
+    let teammate = player as? NSDictionary
+    let guardian = teammate?["guardians"] as! String
+    let playerName = teammate?["name"] as! String
+    let team = "Sharks"
+    let date = "March 17, at 3PM"
+    
+    let letterToGuardian = "Dear \(guardian), we would like to welcome you to a new year of youth soccer! \(playerName) has been placed with team \(team) this season. The first practice will be on \(date). Thank you for your continued support and have fun! "
+    letters.append(letterToGuardian)
+}
+
+for player in teamDragons {
+    let teammate = player as? NSDictionary
+    let guardian = teammate?["guardians"] as! String
+    let playerName = teammate?["name"] as! String
+    let team = "Dragons"
+    let date = "March 17, at 1PM"
+    
+    let letterToGuardian = "Dear \(guardian), we would like to welcome you to a new year of youth soccer! \(playerName) has been placed with team \(team) this season. The first practice will be on \(date). Thank you for your continued support and have fun! "
+    letters.append(letterToGuardian)
+}
+
+for player in teamRaptors {
+    let teammate = player as? NSDictionary
+    let guardian = teammate?["guardians"] as! String
+    let playerName = teammate?["name"] as! String
+    let team = "Raptors"
+    let date = "March 18, at 1PM"
+    
+    let letterToGuardian = "Dear \(guardian), we would like to welcome you to a new year of youth soccer! \(playerName) has been placed with team \(team) this season. The first practice will be on \(date). Thank you for your continued support and have fun! "
+    letters.append(letterToGuardian)
+}
 
 
-print(hasExperience)
-print(noExperience)
-//print(sortedByHeight)
-// print(soccorLeaguePlayer[10]["name"]!)
+func printLetters() {
+    var count = 0
+    while count < letters.count {
+        for letter in letters {
+            print(letter)
+            count += 1
+        }
+    }
+}
+
+
+printLetters()
+
